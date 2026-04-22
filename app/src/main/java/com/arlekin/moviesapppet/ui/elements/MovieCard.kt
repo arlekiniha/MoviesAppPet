@@ -18,12 +18,13 @@ import androidx.compose.ui.unit.dp
 fun MovieCard(
     title: String,
     description: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     ) {
     Row (
         modifier = modifier
             .fillMaxWidth()
-            .clickable(enabled = true, onClick = { })
+            .clickable(enabled = true, onClick = {onClick()})
             .padding(8.dp),
         verticalAlignment = Alignment.CenterVertically
     ){
