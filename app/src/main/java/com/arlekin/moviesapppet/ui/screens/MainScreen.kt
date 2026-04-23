@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.arlekin.moviesapppet.data.model.Movie
 import com.arlekin.moviesapppet.ui.elements.MovieCard
 import com.arlekin.moviesapppet.ui.viewModels.MovieState
@@ -19,25 +20,23 @@ import com.arlekin.moviesapppet.ui.viewModels.MovieViewModel
 
 @Composable
 fun MainScreen(
-    viewModel: MovieViewModel
+    navController: NavController,
+    viewModel: MovieViewModel = MovieViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    var selectedMovie by remember { mutableStateOf<Movie?>(null) }
 
     when (val currentState = state) {
         is MovieState.Loading -> CircularProgressIndicator()
         is MovieState.Success -> {
-            if (selectedMovie == null) {
-                LazyColumn {
-                    items(currentState.movies) { movie ->
-                        MovieCard(
-                            movie = movie,
-                            onClick = { selectedMovie = movie }
-                        )
-                    }
+            LazyColumn {
+                items(currentState.movies) { movie ->
+                    MovieCard(
+                        movie = movie,
+                        onClick = {
+                            navController.navigate("details/${movie.id}")
+                        }
+                    )
                 }
-            } else {
-                DetailScreen(movie = selectedMovie!!)
             }
         }
         is MovieState.Error -> Text("Error")
