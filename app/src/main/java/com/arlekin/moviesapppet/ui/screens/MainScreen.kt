@@ -23,21 +23,24 @@ fun MainScreen(
     val state by viewModel.state.collectAsState()
     var selectedMovie by remember { mutableStateOf<Movie?>(null) }
 
-    when (state) {
+    when (val currentState = state) {
         is MovieState.Loading -> Text("Loading...")
         is MovieState.Success -> {
-            val movies = (state as MovieState.Success).movies
             if (selectedMovie == null) {
                 LazyColumn {
-                    items(movies) { movie ->
-                        MovieCard(movie.title, movie.description, { selectedMovie = movie })
+                    items(currentState.movies) { movie ->
+                        MovieCard(
+                            movie.title,
+                            movie.description,
+                            { selectedMovie = movie })
                     }
                 }
             } else {
-                DetailScreen(movie = selectedMovie!!)
+                selectedMovie?.let { movie ->
+                    DetailScreen(movie = movie)
+                }
             }
         }
-
         is MovieState.Error -> Text("Error")
     }
 }
