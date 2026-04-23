@@ -31,18 +31,17 @@ fun MainScreen(
                 LazyColumn {
                     items(currentState.movies) { movie ->
                         MovieCard(
-                            movie.title,
-                            movie.description,
-                            { selectedMovie = movie })
+                            movie = movie,
+                            onClick = { selectedMovie = movie }
+                        )
                     }
                 }
             } else {
-                selectedMovie?.let { movie ->
-                    DetailScreen(movie = movie)
-                }
+                DetailScreen(movie = selectedMovie!!)
             }
         }
         is MovieState.Error -> Text("Error")
     }
 }
+
 

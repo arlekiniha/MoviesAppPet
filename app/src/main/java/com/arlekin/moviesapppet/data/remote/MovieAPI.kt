@@ -1,10 +1,15 @@
 package com.arlekin.moviesapppet.data.remote
 
-import com.arlekin.moviesapppet.data.model.MovieDto
+import com.arlekin.moviesapppet.data.model.MovieResponseDto
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface MovieApi {
 
-    @GET("posts")
-    suspend fun getMovies(): List<MovieDto>
+    @GET("movie/popular")
+    suspend fun getPopularMovies(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String = "en-US",
+        @Query("page") page: Int = 1
+    ): MovieResponseDto
 }
