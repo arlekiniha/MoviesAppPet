@@ -3,8 +3,7 @@ package com.arlekin.moviesapppet.ui.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arlekin.moviesapppet.data.model.Movie
-import com.arlekin.moviesapppet.data.repository.FakeMoviesRepository
-import kotlinx.coroutines.delay
+import com.arlekin.moviesapppet.data.repository.MovieRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -16,7 +15,8 @@ sealed class MovieState {
 }
 
 class MovieViewModel : ViewModel() {
-    private val repository = FakeMoviesRepository()
+
+    private val repository = MovieRepository()
 
     private val _state = MutableStateFlow<MovieState>(MovieState.Loading)
     val state: StateFlow<MovieState> = _state
@@ -25,10 +25,14 @@ class MovieViewModel : ViewModel() {
         loadMovies()
     }
 
-    private fun loadMovies(){
+    private fun loadMovies() {
         viewModelScope.launch {
-            delay(1000) // loading imitation
-            _state.value = MovieState.Success(repository.fakeRep)
-
+            try {
+                val movies = repository.getMovies()
+                _state.value = MovieState.Success(movies)
+            } catch (e: Exception) {
+                _state.value = MovieState.Error("Error")
+            }
+        }
     }
-}}
+}

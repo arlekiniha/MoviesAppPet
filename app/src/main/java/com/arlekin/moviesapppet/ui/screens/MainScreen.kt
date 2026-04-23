@@ -3,6 +3,7 @@ package com.arlekin.moviesapppet.ui.screens
 import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -24,7 +25,7 @@ fun MainScreen(
     var selectedMovie by remember { mutableStateOf<Movie?>(null) }
 
     when (val currentState = state) {
-        is MovieState.Loading -> Text("Loading...")
+        is MovieState.Loading -> CircularProgressIndicator()
         is MovieState.Success -> {
             if (selectedMovie == null) {
                 LazyColumn {
