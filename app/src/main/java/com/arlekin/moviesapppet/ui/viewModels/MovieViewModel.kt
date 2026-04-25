@@ -7,6 +7,7 @@ import com.arlekin.moviesapppet.data.repository.MovieRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 sealed class MovieState {
     object Loading : MovieState()
@@ -14,9 +15,9 @@ sealed class MovieState {
     data class Error(val message: String) : MovieState()
 }
 
-class MovieViewModel : ViewModel() {
-
-    private val repository = MovieRepository()
+class MovieViewModel @Inject constructor(
+    private val repository: MovieRepository
+) : ViewModel() {
 
     private val _state = MutableStateFlow<MovieState>(MovieState.Loading)
     val state: StateFlow<MovieState> = _state

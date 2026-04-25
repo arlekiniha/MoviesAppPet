@@ -8,12 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.arlekin.moviesapppet.data.model.Movie
 import com.arlekin.moviesapppet.ui.elements.MovieCard
 import com.arlekin.moviesapppet.ui.viewModels.MovieState
 import com.arlekin.moviesapppet.ui.viewModels.MovieViewModel
@@ -21,7 +17,7 @@ import com.arlekin.moviesapppet.ui.viewModels.MovieViewModel
 @Composable
 fun MainScreen(
     navController: NavController,
-    viewModel: MovieViewModel = MovieViewModel()
+    viewModel: MovieViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
 

@@ -2,9 +2,13 @@ package com.arlekin.moviesapppet.data.repository
 
 import com.arlekin.moviesapppet.data.model.Movie
 import com.arlekin.moviesapppet.data.remote.ApiKey
+import com.arlekin.moviesapppet.data.remote.MovieApi
 import com.arlekin.moviesapppet.data.remote.RetrofitInstance
+import javax.inject.Inject
 
-class MovieRepository {
+class MovieRepository @Inject constructor(
+    private val api: MovieApi
+) {
 
     suspend fun getMovies(): List<Movie> {
         val response = RetrofitInstance.api.getPopularMovies(ApiKey.TMDB_API_KEY)
