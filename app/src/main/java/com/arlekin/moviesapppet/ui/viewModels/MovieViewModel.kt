@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arlekin.moviesapppet.data.model.Movie
 import com.arlekin.moviesapppet.data.repository.MovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -15,6 +16,7 @@ sealed class MovieState {
     data class Error(val message: String) : MovieState()
 }
 
+@HiltViewModel
 class MovieViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {

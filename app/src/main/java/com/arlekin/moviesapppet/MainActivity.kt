@@ -11,8 +11,10 @@ import com.arlekin.moviesapppet.ui.screens.DetailScreen
 import com.arlekin.moviesapppet.ui.screens.MainScreen
 import com.arlekin.moviesapppet.ui.theme.MoviesAppPetTheme
 import com.arlekin.moviesapppet.ui.viewModels.MovieViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.getValue
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val vm: MovieViewModel by viewModels()
@@ -21,8 +23,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            setContent {
-
                 val navController = rememberNavController()
 
                 NavHost(
@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                 }
         }
     }
-}}
+}
 
 
 
