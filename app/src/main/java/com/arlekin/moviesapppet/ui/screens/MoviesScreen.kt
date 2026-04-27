@@ -62,7 +62,7 @@ fun ErrorView() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Ошибка загрузки данных")
+        Text(text = "Loading error")
     }
 }
 

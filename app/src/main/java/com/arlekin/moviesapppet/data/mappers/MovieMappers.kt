@@ -6,7 +6,7 @@ import com.arlekin.moviesapppet.domain.model.Movie
 
 fun MovieEntity.toDomain(): Movie {
     return Movie(
-        id= id,
+        id = id,
         title = title,
         description = description,
         posterUrl = posterUrl,
