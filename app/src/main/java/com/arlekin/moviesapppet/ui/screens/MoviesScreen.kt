@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.arlekin.moviesapppet.ui.viewModels.MovieState
 import com.arlekin.moviesapppet.ui.viewModels.MovieViewModel
 import com.arlekin.moviesapppet.domain.model.Movie
@@ -16,30 +17,34 @@ import com.arlekin.moviesapppet.ui.elements.MovieItem
 
 @Composable
 fun MoviesScreen(
+    navController: NavController,
     viewModel: MovieViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
     val favorites by viewModel.favorites.collectAsState()
 
-    when (state) {
-        is MovieState.Loading -> LoadingView()
-        is MovieState.Error -> ErrorView()
-        is MovieState.Success -> {
-            val movies = (state as MovieState.Success).movies
-            MoviesList(
-                movies = movies,
-                favorites = favorites,
-                onFavoriteClick = { movie ->
-                    if (favorites.any { it.id == movie.id }) {
-                        viewModel.removeFavorite(movie.id)
-                    } else {
-                        viewModel.addFavorite(movie)
+    Column {
+        when (state) {
+            is MovieState.Loading -> LoadingView()
+            is MovieState.Error -> ErrorView()
+            is MovieState.Success -> {
+                val movies = (state as MovieState.Success).movies
+                MoviesList(
+                    movies = movies,
+                    favorites = favorites,
+                    onFavoriteClick = { movie ->
+                        if (favorites.any { it.id == movie.id }) {
+                            viewModel.removeFavorite(movie.id)
+                        } else {
+                            viewModel.addFavorite(movie)
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     }
 }
+
 
 @Composable
 fun LoadingView() {

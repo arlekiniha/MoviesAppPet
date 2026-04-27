@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.arlekin.moviesapppet.domain.model.Movie
 
 @Composable
@@ -24,9 +25,18 @@ fun MovieItem(
         Row(
             modifier = Modifier
                 .padding(12.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+                .fillMaxWidth()
         ) {
+
+            AsyncImage(
+                model = movie.posterUrl,
+                contentDescription = null,
+                modifier = Modifier
+                    .size(100.dp)
+            )
+
+            Spacer(modifier = Modifier.width(12.dp))
+
             Column(modifier = Modifier.weight(1f)) {
                 Text(text = movie.title, style = MaterialTheme.typography.titleMedium)
                 Spacer(modifier = Modifier.height(4.dp))
@@ -42,3 +52,4 @@ fun MovieItem(
         }
     }
 }
+
