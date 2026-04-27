@@ -69,5 +69,11 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler.v248)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.compose.material.icons.extended)
+
+
 
 }
