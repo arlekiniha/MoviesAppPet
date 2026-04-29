@@ -7,6 +7,7 @@ import com.arlekin.moviesapppet.data.remote.ApiKey
 import com.arlekin.moviesapppet.data.remote.MovieApi
 import com.arlekin.moviesapppet.domain.model.Movie
 import com.arlekin.moviesapppet.domain.repository.MovieRepository
+import com.arlekin.moviesapppet.util.DomainError
 import com.arlekin.moviesapppet.util.Resource
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class MovieRepositoryImpl @Inject constructor(
             val movies = response.results.map { it.toDomain() }
             Resource.Success(movies)
         } catch (e: Exception) {
-            Resource.Error("Failed to load movies")
+        Resource.Failure(DomainError.RemoteError)
         }
     }
 

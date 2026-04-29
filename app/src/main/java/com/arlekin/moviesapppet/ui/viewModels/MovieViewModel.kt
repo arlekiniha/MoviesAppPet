@@ -3,10 +3,11 @@ package com.arlekin.moviesapppet.ui.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arlekin.moviesapppet.domain.model.Movie
-import com.arlekin.moviesapppet.util.usecase.AddFavouriteUseCase
-import com.arlekin.moviesapppet.util.usecase.GetFavoriteUseCase
-import com.arlekin.moviesapppet.util.usecase.GetMoviesUseCase
-import com.arlekin.moviesapppet.util.usecase.RemoveFavoriteUseCase
+import com.arlekin.moviesapppet.domain.usecase.AddFavouriteUseCase
+import com.arlekin.moviesapppet.domain.usecase.GetFavoriteUseCase
+import com.arlekin.moviesapppet.domain.usecase.GetMoviesUseCase
+import com.arlekin.moviesapppet.domain.usecase.RemoveFavoriteUseCase
+import com.arlekin.moviesapppet.util.DomainError
 import com.arlekin.moviesapppet.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,10 +46,10 @@ class MovieViewModel @Inject constructor(
 
             when (val result = getMoviesUseCase()) {
                 is Resource.Success -> {
-                    _state.value = MovieState.Success(result.data ?: emptyList())
+                    _state.value = MovieState.Success(result.data)
                 }
-                is Resource.Error -> {
-                    _state.value = MovieState.Error(result.message ?: "Error")
+                is Resource.Failure -> {
+                    _state.value = MovieState.Error(result.error.toUi())
                 }
 
                 else -> {}
@@ -74,5 +75,13 @@ class MovieViewModel @Inject constructor(
             removeFavoriteUseCase(id)
             loadFavorites()
         }
+    }
+}
+
+fun DomainError?.toUi(): String {
+    return when(this){
+        DomainError.RemoteError -> "Server Error"
+        DomainError.LocalError -> "Local Error"
+        else -> "Unknown Error"
     }
 }

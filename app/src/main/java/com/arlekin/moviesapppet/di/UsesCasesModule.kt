@@ -1,10 +1,10 @@
 package com.arlekin.moviesapppet.di
 
 import com.arlekin.moviesapppet.domain.repository.MovieRepository
-import com.arlekin.moviesapppet.util.usecase.AddFavouriteUseCase
-import com.arlekin.moviesapppet.util.usecase.GetFavoriteUseCase
-import com.arlekin.moviesapppet.util.usecase.GetMoviesUseCase
-import com.arlekin.moviesapppet.util.usecase.RemoveFavoriteUseCase
+import com.arlekin.moviesapppet.domain.usecase.AddFavouriteUseCase
+import com.arlekin.moviesapppet.domain.usecase.GetFavoriteUseCase
+import com.arlekin.moviesapppet.domain.usecase.GetMoviesUseCase
+import com.arlekin.moviesapppet.domain.usecase.RemoveFavoriteUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

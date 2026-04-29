@@ -31,7 +31,7 @@ fun NavigationGraph(navController: NavHostController) {
 
             composable("movies") {
                 val vm: MovieViewModel = hiltViewModel()
-                MoviesScreen(navController = navController, viewModel = vm)
+                MoviesScreen( viewModel = vm)
             }
 
             composable("favorites") {

@@ -17,7 +17,6 @@ import com.arlekin.moviesapppet.ui.elements.MovieItem
 
 @Composable
 fun MoviesScreen(
-    navController: NavController,
     viewModel: MovieViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()

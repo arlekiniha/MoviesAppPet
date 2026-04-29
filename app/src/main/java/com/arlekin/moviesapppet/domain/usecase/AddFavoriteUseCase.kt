@@ -1,4 +1,4 @@
-package com.arlekin.moviesapppet.util.usecase
+package com.arlekin.moviesapppet.domain.usecase
 
 import com.arlekin.moviesapppet.domain.model.Movie
 import com.arlekin.moviesapppet.domain.repository.MovieRepository
