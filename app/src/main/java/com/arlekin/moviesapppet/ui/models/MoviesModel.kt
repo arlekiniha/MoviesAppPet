@@ -1,6 +1,6 @@
-package com.arlekin.moviesapppet.domain.model
+package com.arlekin.moviesapppet.ui.models
 
-data class Movie(
+data class MovieUi(
     val id: Int,
     val title: String,
     val description: String,

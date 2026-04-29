@@ -9,19 +9,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.arlekin.moviesapppet.ui.viewModels.MovieState
 import com.arlekin.moviesapppet.ui.viewModels.MovieViewModel
-import com.arlekin.moviesapppet.domain.model.Movie
 import com.arlekin.moviesapppet.ui.elements.MovieItem
+import com.arlekin.moviesapppet.ui.models.MovieUi
 
 @Composable
 fun MoviesScreen(
     viewModel: MovieViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    val favorites by viewModel.favorites.collectAsState()
 
+    LaunchedEffect(Unit) {
+        viewModel.loadMovies()
+    }
     Column {
         when (state) {
             is MovieState.Loading -> LoadingView()
@@ -30,14 +31,7 @@ fun MoviesScreen(
                 val movies = (state as MovieState.Success).movies
                 MoviesList(
                     movies = movies,
-                    favorites = favorites,
-                    onFavoriteClick = { movie ->
-                        if (favorites.any { it.id == movie.id }) {
-                            viewModel.removeFavorite(movie.id)
-                        } else {
-                            viewModel.addFavorite(movie)
-                        }
-                    }
+                    onFavoriteClick = viewModel::onFavoriteClick
                 )
             }
         }
@@ -67,9 +61,8 @@ fun ErrorView() {
 
 @Composable
 fun MoviesList(
-    movies: List<Movie>,
-    favorites: List<Movie>,
-    onFavoriteClick: (Movie) -> Unit
+    movies: List<MovieUi>,
+    onFavoriteClick: (movieId: Int) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -78,9 +71,12 @@ fun MoviesList(
         items(movies) { movie ->
             MovieItem(
                 movie = movie,
-                isFavorite = favorites.any { it.id == movie.id },
-                onFavoriteClick = { onFavoriteClick(movie) }
+                isFavorite = movie.isFavorite,
+                onFavoriteClick = onFavoriteClick,
             )
         }
     }
 }
+
+
+

@@ -9,6 +9,10 @@ import com.arlekin.moviesapppet.domain.model.Movie
 import com.arlekin.moviesapppet.domain.repository.MovieRepository
 import com.arlekin.moviesapppet.util.DomainError
 import com.arlekin.moviesapppet.util.Resource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
@@ -16,29 +20,30 @@ class MovieRepositoryImpl @Inject constructor(
     private val dao: MovieDao
 ) : MovieRepository {
 
-    override suspend fun getMovies(): Resource<List<Movie>> {
-        return try {
+    override val movies: Flow<List<Movie>> = dao.getAllMovies().map { movies ->
+        movies.map { it.toDomain() }
+    }
+
+    override val favoritesMovies: Flow<List<Movie>> =
+        dao.getFavouriteMovies().map { movies -> movies.map { it.toDomain() } }
+
+    override suspend fun fetchMovies(): Resource<Unit> = withContext(Dispatchers.IO) {
+        try {
             val response = api.getMovies(apiKey = ApiKey.TMDB_API_KEY)
-            val movies = response.results.map { it.toDomain() }
-            Resource.Success(movies)
-        } catch (e: Exception) {
-        Resource.Failure(DomainError.RemoteError)
+            val movies = response.results.map { it.toEntity() }
+            dao.insertAllMoviesSafely(movies)
+            Resource.Success(Unit)
+        } catch (_: Exception) {
+            Resource.Failure(DomainError.RemoteError)
         }
     }
 
-    override suspend fun addFavorite(movie: Movie) {
-        dao.insertMovie(movie.toEntity())
+    override suspend fun updateIsFavorite(movieId: Int, isFavorite: Boolean) {
+        dao.setIsFavoriteMovie(movieId, isFavorite)
     }
 
     override suspend fun removeFavorite(movieId: Int) {
-        val entity = dao.getMoviesById(movieId)
-        if (entity != null) {
-            dao.deleteMovie(entity)
-        }
-    }
-
-    override suspend fun getFavorites(): List<Movie> {
-        return dao.getAllMovies().map { it.toDomain() }
+        dao.deleteMovie(movieId)
     }
 }
 

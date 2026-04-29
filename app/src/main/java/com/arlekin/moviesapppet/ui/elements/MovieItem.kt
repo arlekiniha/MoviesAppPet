@@ -10,12 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.arlekin.moviesapppet.domain.model.Movie
+import com.arlekin.moviesapppet.ui.models.MovieUi
 
 @Composable
 fun MovieItem(
-    movie: Movie,
+    movie: MovieUi,
     isFavorite: Boolean,
-    onFavoriteClick: () -> Unit
+    onFavoriteClick: (movieId: Int) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -43,7 +44,7 @@ fun MovieItem(
                 Text(text = movie.description, maxLines = 2)
             }
 
-            IconButton(onClick = onFavoriteClick) {
+            IconButton(onClick = { onFavoriteClick(movie.id) }) {
                 Icon(
                     imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
                     contentDescription = null

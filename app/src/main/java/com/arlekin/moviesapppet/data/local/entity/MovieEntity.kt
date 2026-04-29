@@ -8,6 +8,7 @@ data class MovieEntity(
     @PrimaryKey val id: Int,
     val title: String,
     val description: String,
-    val posterUrl: String,
-    val rating: Double
+    val posterUrl: String?,
+    val rating: Double,
+    val isFavorite: Boolean,
 )

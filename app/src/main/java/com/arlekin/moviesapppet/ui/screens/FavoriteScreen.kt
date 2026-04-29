@@ -16,6 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.arlekin.moviesapppet.ui.viewModels.MovieViewModel
 import com.arlekin.moviesapppet.domain.model.Movie
+import com.arlekin.moviesapppet.ui.models.MovieUi
 
 @Composable
 fun FavoritesScreen(
@@ -23,6 +24,10 @@ fun FavoritesScreen(
     viewModel: MovieViewModel = hiltViewModel()
 ) {
     val favorites by viewModel.favorites.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.loadFavorites()
+    }
 
     Column(modifier = Modifier.fillMaxSize()) {
 
@@ -58,7 +63,7 @@ fun FavoritesScreen(
 
 @Composable
 fun FavoriteItem(
-    movie: Movie,
+    movie: MovieUi,
     onRemove: () -> Unit
 ) {
     Card(

@@ -10,6 +10,7 @@ class MovieRepository @Inject constructor(
     private val api: MovieApi
 ) {
 
+    // todo: remove?
     suspend fun getMovies(): List<Movie> {
         val response = RetrofitInstance.api.getMovies(ApiKey.TMDB_API_KEY)
 
@@ -19,7 +20,8 @@ class MovieRepository @Inject constructor(
                 title = it.title,
                 description = it.overview,
                 posterUrl = "https://image.tmdb.org/t/p/w500${it.poster_path}",
-                rating = it.vote_average
+                rating = it.vote_average,
+                isFavorite = false,
             )
         }
     }

@@ -10,7 +10,8 @@ fun MovieEntity.toDomain(): Movie {
         title = title,
         description = description,
         posterUrl = posterUrl,
-        rating = rating
+        rating = rating,
+        isFavorite = isFavorite,
     )
 }
 
@@ -21,15 +22,17 @@ fun Movie.toEntity(): MovieEntity{
         description = description,
         posterUrl = posterUrl,
         rating = rating,
+        isFavorite = isFavorite,
     )
 }
 
-fun MovieDto.toDomain(): Movie {
-    return Movie(
+fun MovieDto.toEntity(): MovieEntity {
+    return MovieEntity(
         id = id,
         title = title,
         description = overview,
-        posterUrl = poster_path?.let { "https://image.tmdb.org/t/p/w500$it" } ?: "",
-        rating = vote_average
+        posterUrl = poster_path,
+        rating = vote_average,
+        isFavorite = false,
     )
 }
