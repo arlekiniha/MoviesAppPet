@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
 data class BottomNavItem(
-    val route: String,
+    val route: Any,
     val title: String,
     val icon: ImageVector
 )
@@ -19,8 +19,8 @@ data class BottomNavItem(
 fun BottomBar(navController: NavController) {
 
     val items = listOf(
-        BottomNavItem(Screen.Movie.route, "Movies", Icons.Default.Home),
-        BottomNavItem(Screen.Favorites.route, "Favorite", Icons.Default.Favorite)
+        BottomNavItem(MoviesRoute, "Movies", Icons.Default.Home),
+        BottomNavItem(FavoriteRoute, "Favorite", Icons.Default.Favorite)
     )
 
     NavigationBar {
@@ -29,7 +29,13 @@ fun BottomBar(navController: NavController) {
         items.forEach { item ->
             NavigationBarItem(
                 selected = navBackStackEntry.value?.destination?.route == item.route,
-                onClick = { navController.navigate(item.route) },
+                onClick = {
+                    navController.navigate(item.route) {
+                        popUpTo(navController.graph.startDestinationId) {
+                            saveState = true
+                        }
+                    }
+                },
                 icon = { Icon(item.icon, contentDescription = item.title) },
                 label = { Text(item.title) }
             )

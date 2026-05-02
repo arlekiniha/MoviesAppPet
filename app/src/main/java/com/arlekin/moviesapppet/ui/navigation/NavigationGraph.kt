@@ -25,16 +25,16 @@ fun NavigationGraph(navController: NavHostController) {
 
         NavHost(
             navController = navController,
-            startDestination = Screen.Movie,
+            startDestination = MoviesRoute,
             modifier = Modifier.padding(padding)
         ) {
 
-            composable(Screen.Movie.route) {
+            composable<MoviesRoute> {
                 val vm: MovieViewModel = hiltViewModel()
-                MoviesScreen( viewModel = vm)
+                MoviesScreen(viewModel = vm)
             }
 
-            composable(Screen.Movie.route) {
+            composable<FavoriteRoute> {
                 val vm: MovieViewModel = hiltViewModel()
                 FavoritesScreen(navController = navController, viewModel = vm)
             }
