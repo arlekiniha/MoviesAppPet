@@ -1,13 +1,17 @@
 package com.arlekin.moviesapppet.ui.navigation
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.arlekin.moviesapppet.R
+
 
 data class BottomNavItem(
     val route: Any,
@@ -19,8 +23,8 @@ data class BottomNavItem(
 fun BottomBar(navController: NavController) {
 
     val items = listOf(
-        BottomNavItem(MoviesRoute, "Movies", Icons.Default.Home),
-        BottomNavItem(FavoriteRoute, "Favorite", Icons.Default.Favorite)
+        BottomNavItem(MoviesRoute, stringResource(R.string.movies), Icons.Default.Home),
+        BottomNavItem(FavoriteRoute, stringResource(R.string.favorite), Icons.Default.Favorite)
     )
 
     NavigationBar {
