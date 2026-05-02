@@ -19,8 +19,8 @@ data class BottomNavItem(
 fun BottomBar(navController: NavController) {
 
     val items = listOf(
-        BottomNavItem("movies", "Movies", Icons.Default.Home),
-        BottomNavItem("favorites", "Favorite", Icons.Default.Favorite)
+        BottomNavItem(Screen.Movie.route, "Movies", Icons.Default.Home),
+        BottomNavItem(Screen.Favorites.route, "Favorite", Icons.Default.Favorite)
     )
 
     NavigationBar {
