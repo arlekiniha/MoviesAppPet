@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -25,16 +24,16 @@ fun NavigationGraph(navController: NavHostController) {
 
         NavHost(
             navController = navController,
-            startDestination = "movies",
+            startDestination = MoviesRoute,
             modifier = Modifier.padding(padding)
         ) {
 
-            composable("movies") {
+            composable<MoviesRoute> {
                 val vm: MovieViewModel = hiltViewModel()
-                MoviesScreen( viewModel = vm)
+                MoviesScreen(viewModel = vm)
             }
 
-            composable("favorites") {
+            composable<FavoriteRoute> {
                 val vm: MovieViewModel = hiltViewModel()
                 FavoritesScreen(navController = navController, viewModel = vm)
             }
