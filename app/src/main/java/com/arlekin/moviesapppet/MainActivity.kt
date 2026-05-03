@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MoviesAppPetTheme {
+            MoviesAppPetTheme(darkTheme = true) {
                 Surface(color = MaterialTheme.colorScheme.background) {
 
                     val navController = rememberNavController()
