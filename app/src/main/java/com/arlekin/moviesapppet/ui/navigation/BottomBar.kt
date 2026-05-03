@@ -15,17 +15,18 @@ import com.arlekin.moviesapppet.R
 
 data class BottomNavItem(
     val route: Any,
-    val title: String,
+    @StringRes val title: Int,
     val icon: ImageVector
+)
+
+val items = listOf(
+    BottomNavItem(MoviesRoute, R.string.movies, Icons.Default.Home),
+    BottomNavItem(FavoriteRoute, R.string.favorite, Icons.Default.Favorite)
 )
 
 @Composable
 fun BottomBar(navController: NavController) {
 
-    val items = listOf(
-        BottomNavItem(MoviesRoute, stringResource(R.string.movies), Icons.Default.Home),
-        BottomNavItem(FavoriteRoute, stringResource(R.string.favorite), Icons.Default.Favorite)
-    )
 
     NavigationBar {
         val navBackStackEntry = navController.currentBackStackEntryAsState()
@@ -40,8 +41,8 @@ fun BottomBar(navController: NavController) {
                         }
                     }
                 },
-                icon = { Icon(item.icon, contentDescription = item.title) },
-                label = { Text(item.title) }
+                icon = { Icon(item.icon, contentDescription = stringResource(item.title)) },
+                label = { Text(stringResource(item.title)) }
             )
         }
     }
