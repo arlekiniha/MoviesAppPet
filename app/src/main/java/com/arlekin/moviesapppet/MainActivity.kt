@@ -7,8 +7,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.navigation.compose.rememberNavController
 import com.arlekin.moviesapppet.ui.navigation.NavigationGraph
-import com.arlekin.moviesapppet.ui.theme.MoviesAppPetTheme
 import dagger.hilt.android.AndroidEntryPoint
+import com.arlekin.design.MoviesTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MoviesAppPetTheme(darkTheme = true) {
+            MoviesTheme {
                 Surface(color = MaterialTheme.colorScheme.background) {
 
                     val navController = rememberNavController()

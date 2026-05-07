@@ -3,9 +3,12 @@ package com.arlekin.design
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.isSystemInDarkTheme
+import com.arlekin.design.theme.DsDarkColorScheme
+import com.arlekin.design.theme.DsLightColorScheme
+import com.arlekin.design.theme.basic.DsTypography
 
 @Composable
-fun MoviesDesignSystemTheme(
+fun MoviesTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

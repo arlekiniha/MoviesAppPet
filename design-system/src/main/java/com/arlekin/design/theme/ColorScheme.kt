@@ -1,10 +1,10 @@
-package com.arlekin.design
+package com.arlekin.design.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
-object DsLightColors {
+private object DsLightColors {
     val background = Color(0xFFFFFFFF)
     val onBackground = Color(0xFF1A1A1A)
 
@@ -42,7 +42,7 @@ val DsLightColorScheme = lightColorScheme(
     onError = DsLightColors.onError
 )
 
-object DsDarkColors {
+private object DsDarkColors {
     val background = Color(0xFF0B0B0F)
     val onBackground = Color(0xFFFFFFFF)
 

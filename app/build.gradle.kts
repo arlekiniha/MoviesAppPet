@@ -72,4 +72,6 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.logging.interceptor)
     implementation(libs.kotlinx.serialization.json)
+    implementation(project(":design-system"))
+
 }

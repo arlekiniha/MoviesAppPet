@@ -30,3 +30,8 @@ dependencies {
 
     debugImplementation(libs.ui.tooling)
 }
+
+kotlin {
+    jvmToolchain(17)
+}
+

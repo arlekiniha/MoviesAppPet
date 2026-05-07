@@ -1,4 +1,4 @@
-package com.arlekin.design
+package com.arlekin.design.theme.basic
 
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font

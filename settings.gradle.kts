@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Movies App Pet"
 include(":app")
-include(":design")
+include(":design-system")
