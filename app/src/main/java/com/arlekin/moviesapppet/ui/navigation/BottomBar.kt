@@ -9,7 +9,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.arlekin.design.theme.MoviesTheme
 import com.arlekin.moviesapppet.R
 
 
@@ -27,13 +29,23 @@ val items = listOf(
 @Composable
 fun BottomBar(navController: NavController) {
 
-
-    NavigationBar {
+    NavigationBar(
+        containerColor = MoviesTheme.colors.surface,
+        contentColor = MoviesTheme.colors.onSurface,
+    ) {
         val navBackStackEntry = navController.currentBackStackEntryAsState()
 
         items.forEach { item ->
             NavigationBarItem(
-                selected = navBackStackEntry.value?.destination?.route == item.route,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = MoviesTheme.colors.primary,
+                    selectedTextColor = MoviesTheme.colors.primary,
+                    unselectedIconColor = MoviesTheme.colors.onDisabled,
+                    unselectedTextColor = MoviesTheme.colors.onDisabled,
+                    disabledIconColor = MoviesTheme.colors.onDisabled,
+                    disabledTextColor = MoviesTheme.colors.onDisabled,
+                ),
+                selected = navBackStackEntry.value?.destination?.hasRoute(item.route::class) == true,
                 onClick = {
                     navController.navigate(item.route) {
                         popUpTo(navController.graph.startDestinationId) {

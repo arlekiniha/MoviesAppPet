@@ -1,22 +1,21 @@
 package com.arlekin.design.theme
 
 import androidx.compose.runtime.Composable
-import com.arlekin.design.theme.basic.DsShapes
-import com.arlekin.design.theme.basic.DsSpacing
-import com.arlekin.design.theme.basic.DsTypography
-import com.arlekin.design.theme.basic.colors.DsColors
+import com.arlekin.design.theme.basic.MoviesShapes
+import com.arlekin.design.theme.basic.MoviesSpacing
+import com.arlekin.design.theme.basic.MoviesTypography
+import com.arlekin.design.theme.basic.colors.MoviesColorScheme
 
 object MoviesTheme {
+    val colors: MoviesColorScheme
+        @Composable get() = LocalMoviesColorScheme.current
 
-    val colors: DsColors
-        @Composable get() = LocalMoviesColors.current
-
-    val typography: DsTypography
+    val typography: MoviesTypography
         @Composable get() = LocalMoviesTypography.current
 
-    val spacing: DsSpacing
+    val spacing: MoviesSpacing
         @Composable get() = LocalMoviesSpacing.current
 
-    val shapes: DsShapes
+    val shapes: MoviesShapes
         @Composable get() = LocalMoviesShapes.current
 }

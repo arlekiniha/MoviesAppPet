@@ -22,51 +22,59 @@ private val Inter = FontFamily(
     Font(R.font.inter_semibold, FontWeight.W600)
 )
 
-object DsTypography {
+data class MoviesTypography(
+    val h1: TextStyle,
+    val h2: TextStyle,
+    val bodyLg: TextStyle,
+    val bodyMd: TextStyle,
+    val labelMd: TextStyle,
+    val labelSm: TextStyle,
+)
 
-    val h1 = TextStyle(
+internal val DefaultMoviesTypography = MoviesTypography(
+    h1 = TextStyle(
         fontFamily = SplineSans,
         fontSize = 32.sp,
         fontWeight = FontWeight.W700,
         lineHeight = 40.sp,
         letterSpacing = (-0.02).em
-    )
+    ),
 
-    val h2 = TextStyle(
+    h2 = TextStyle(
         fontFamily = SplineSans,
         fontSize = 24.sp,
         fontWeight = FontWeight.W600,
         lineHeight = 32.sp,
         letterSpacing = (-0.01).em
-    )
+    ),
 
-    val bodyLg = TextStyle(
+    bodyLg = TextStyle(
         fontFamily = Inter,
         fontSize = 18.sp,
         fontWeight = FontWeight.W400,
         lineHeight = 28.sp
-    )
+    ),
 
-    val bodyMd = TextStyle(
+    bodyMd = TextStyle(
         fontFamily = Inter,
         fontSize = 16.sp,
         fontWeight = FontWeight.W400,
         lineHeight = 24.sp
-    )
+    ),
 
-    val labelMd = TextStyle(
+    labelMd = TextStyle(
         fontFamily = Inter,
         fontSize = 14.sp,
         fontWeight = FontWeight.W500,
         lineHeight = 20.sp,
         letterSpacing = 0.01.em
-    )
+    ),
 
-    val labelSm = TextStyle(
+    labelSm = TextStyle(
         fontFamily = Inter,
         fontSize = 12.sp,
         fontWeight = FontWeight.W600,
         lineHeight = 16.sp,
         letterSpacing = 0.05.em
-    )
-}
+    ),
+)

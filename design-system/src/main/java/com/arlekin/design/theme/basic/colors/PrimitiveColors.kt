@@ -2,7 +2,7 @@ package com.arlekin.design.theme.basic.colors
 
 import androidx.compose.ui.graphics.Color
 
-object Colors {
+internal object PrimitiveColors {
     //----------RED------------
     val Red10 = Color(0xfffff7f6)
     val Red20 = Color(0xffffecea)
@@ -25,4 +25,7 @@ object Colors {
     val Violet300 = Color(0xffb3b1ff)
     val Violet700 = Color(0xff3626ce)
     val Violet900 = Color(0xff1d00a5)
+    //----------Grey---------------
+    val Grey10 = Color(0xffe0e0e0)
+    val Grey700 = Color(0xFF494949)
 }

@@ -2,7 +2,8 @@ package com.arlekin.design.theme.basic
 
 import androidx.compose.ui.unit.dp
 
-object DsSpacing {
+// TODO: same as Typography
+object MoviesSpacing {
     val unit = 4.dp
     val xs = 4.dp
     val sm = 8.dp
