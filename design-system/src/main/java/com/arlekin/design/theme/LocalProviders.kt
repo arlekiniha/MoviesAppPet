@@ -4,6 +4,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import com.arlekin.design.theme.basic.DsShapes
 import com.arlekin.design.theme.basic.DsSpacing
 import com.arlekin.design.theme.basic.DsTypography
+import com.arlekin.design.theme.basic.colors.DsColors
 
 val LocalMoviesColors = staticCompositionLocalOf<DsColors> {
     error("no colors provided")

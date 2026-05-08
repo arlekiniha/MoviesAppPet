@@ -1,9 +1,8 @@
-package com.arlekin.design.theme
+package com.arlekin.design.theme.basic.colors
 
 import androidx.compose.ui.graphics.Color
 
-
-data class DsColors(
+data class DsColorsModel(
     val background: Color,
     val onBackground: Color,
 

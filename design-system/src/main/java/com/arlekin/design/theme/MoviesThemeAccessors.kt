@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.arlekin.design.theme.basic.DsShapes
 import com.arlekin.design.theme.basic.DsSpacing
 import com.arlekin.design.theme.basic.DsTypography
+import com.arlekin.design.theme.basic.colors.DsColors
 
 object MoviesTheme {
 
